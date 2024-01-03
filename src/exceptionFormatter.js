@@ -15,7 +15,6 @@
 //     }
 //
 
-const colors = require('colors/safe');
 const { stripColors } = require('./utils');
 
 // Borrowed from ejs
@@ -228,32 +227,6 @@ const formatters = {
             }
         });
     },
-
-    ansi: (function() {
-        const colorizeLine = function(parsed) {
-            const file = `${parsed.filename}:${parsed.line}:${parsed.column}`;
-            if (isDefined(parsed.fn)) {
-                return `${parsed.indent}at ${colors.magenta(parsed.fn)} (${colors.cyan(file)})`;
-            } else {
-                return `${parsed.indent}at (${colors.cyan(file)})`;
-            }
-        };
-        return (exception, options = {}) =>
-            formatExceptionLines(exception, options, function({ line, type, parsed }) {
-                switch (type) {
-                    case OUR_SOURCE:
-                        if (isDefined(options.colors) ? options.colors : true) {
-                            return colors.bold(colorizeLine(parsed));
-                        } else {
-                            return colors.bold(line);
-                        }
-                    // when SOURCE
-                    //     colorizeLine(parsed)
-                    default:
-                        return line;
-                }
-            });
-    })(),
 };
 
 //
