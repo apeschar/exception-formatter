@@ -79,7 +79,7 @@ function parseExceptionLine(line) {
 // `options.basepathReplacement` defaults to "./" if not specified.
 //
 function parseException(exception, options = {}) {
-    let basepath = isDefined(options.basepath) ? options.basepath : process.cwd();
+    let basepath = isDefined(options.basepath) ? options.basepath : '/';
 
     // Add a trailing '/' to the basepath if it doesn't have one, because `__dirname` doesn't
     // have one.  Don't add the trailing '/' if it's a regex, because that's crazy talk.  :)
