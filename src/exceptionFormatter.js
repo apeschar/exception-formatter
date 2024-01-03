@@ -15,7 +15,6 @@
 //     }
 //
 
-const path = require('path');
 const colors = require('colors/safe');
 const { stripColors } = require('./utils');
 
@@ -85,12 +84,12 @@ function parseException(exception, options = {}) {
 
     // Add a trailing '/' to the basepath if it doesn't have one, because `__dirname` doesn't
     // have one.  Don't add the trailing '/' if it's a regex, because that's crazy talk.  :)
-    if (typeof basepath === 'string' && !basepath.endsWith(path.sep)) {
-        basepath += path.sep;
+    if (typeof basepath === 'string' && !basepath.endsWith('/')) {
+        basepath += '/';
     }
     const basepathReplacement = isDefined(options.basepathReplacement)
         ? options.basepathReplacement
-        : `.${path.sep}`;
+        : `./`;
 
     const exceptionText =
         typeof exception === 'string'
